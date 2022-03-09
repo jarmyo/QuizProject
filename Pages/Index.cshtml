@@ -4,10 +4,10 @@
     ViewData["Title"] = "Home page";
 }
 <div class="row">
-<div class="text-center">
-    <h1 class="display-4">Search of STEMauts</h1>
-    <h2>Unraveling the riddles of space at the speed of fun</h2>    
-</div>
+    <div class="text-center">
+        <h1 class="display-4">Search of STEMauts</h1>
+        <h2>Unraveling the riddles of space at the speed of fun</h2>
+    </div>
 </div>
 <hr />
 <div class="row">
@@ -17,23 +17,29 @@
         <button class="btn btn-primary ">Start the Mission</button>
     </div>
     <div class="col">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/Hj8QLPEopuI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Hj8QLPEopuI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 </div>
 <hr />
 <div class="row">
     <div class="col">
-
     </div>
     <div class="col">
         <h2>Mission Status Bar</h2>
         <table class="table">
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Name</td>
-                    <td>999</td>
-                </tr>
+                @{
+                    var rowCounter = 1;
+                }
+                @foreach (var team in Model.ScoreList)
+                {
+                    <tr>
+                        <td>@rowCounter</td>
+                        <td>@team.Name</td>
+                        <td>@team.Score</td>
+                    </tr>
+                    rowCounter++;
+                }
             </tbody>
         </table>
         <a href="">View All</a>

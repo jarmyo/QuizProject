@@ -3,8 +3,7 @@
 @{
     ViewData["Title"] = "Register";
 }
-
-<h1>Create Team Accoun</h1>
+<h1>Create Team Account</h1>
 <h2>Start Here</h2>
 <h3>Create your team by submitting the form below.</h3>
 <p>Your team must be located in the United States and can include up to five middle-grades and high school students. Your team must include an adult sponsor (like your teacher or parent) and fit the terms and conditions outlined in the <a>full contest rules.</a></p>
@@ -40,11 +39,39 @@
                     <span asp-validation-for="Input.SponsorLastName" class="text-danger"></span>
                 </div>
                 <div class="col-12">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                     <label asp-for="Input.Email" class="form-label"></label>
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
-                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                <div class="col-4">
+                    <label asp-for="Input.City" class="form-label"></label>
+                    <input asp-for="Input.City" class="form-control" autocomplete="city" aria-required="true" />
+                    <span asp-validation-for="Input.City" class="text-danger"></span>
+                </div>
+                <div class="col-4">
+                    <label asp-for="Input.State" class="form-label"></label>
+                    <input asp-for="Input.State" class="form-control" autocomplete="state" aria-required="true" />
+                    <span asp-validation-for="Input.State" class="text-danger"></span>
+                </div>
+                <div class="col-4">
+                    <label asp-for="Input.ZipCode" class="form-label"></label>
+                    <input asp-for="Input.ZipCode" class="form-control" autocomplete="zipcode" aria-required="true" />
+                    <span asp-validation-for="Input.ZipCode" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Team Member Email(s) (separated by semicolon </label>
+                    <textarea asp-for="Input.TeamMemberEmails" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Input.TeamMemberEmails" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="terms">
+                    <label class="form-check-label" for="terms"> I accept the contest <a href="">rules and conditions</a>.</label>
+                </div>
+                </div>
+                <div class="col-6">
+                    <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                </div>
             </div>
         </form>
     </div>

@@ -1,12 +1,20 @@
+global using QuizProject.Databases;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using QuizProject.Areas.Identity.Data;
-var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("QuizProjectIdentityDbContextConnection");builder.Services.AddDbContext<QuizProjectIdentityDbContext>(options =>
-    options.UseSqlite(connectionString));builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<QuizProjectIdentityDbContext>();// Add services to the container.
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("QuizProjectIdentityDbContextConnection");
+
+builder.Services.AddDbContext<QuizProjectIdentityDbContext>(options =>
+    options.UseSqlite(connectionString));
+
+builder.Services.AddDbContext<QuizContext>();
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<QuizProjectIdentityDbContext>();// Add services to the container.
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

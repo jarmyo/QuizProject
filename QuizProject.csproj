@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-QuizProject-EEE72BD3-60EC-423C-8E1E-7FA5D36F4A50</UserSecretsId>
   </PropertyGroup>
@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
 </Project>

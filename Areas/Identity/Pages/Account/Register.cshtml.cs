@@ -29,13 +29,16 @@ namespace QuizProject.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly QuizContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            QuizContext context
+            )
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -43,6 +46,7 @@ namespace QuizProject.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         /// <summary>
@@ -69,28 +73,29 @@ namespace QuizProject.Areas.Identity.Pages.Account
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public class InputModel
-        {            
+        {
             [Required]
             [EmailAddress]
             [Display(Name = "Sponsor Email")]
-            public string Email { get; set; }            
+            public string Email { get; set; }
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
-            public string Password { get; set; }         
+            public string Password { get; set; }
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
             [Required]
             [StringLength(256, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
-            [Display(Name ="Team Name")]
+            [Display(Name = "Team Name")]
             public string TeamName { get; set; }
             [Required]
             [Display(Name = "First Name (Sponsor)")]
             public string SponsorFirstName { get; set; }
             [Required]
+            [Display(Name = "Last Name (Sponsor)")]
             public string SponsorLastName { get; set; }
             [Required]
             [StringLength(150, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
@@ -100,7 +105,8 @@ namespace QuizProject.Areas.Identity.Pages.Account
             public string State { get; set; }
             [Required]
             [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
-            public string ZipCode { get; set; }            
+            public string ZipCode { get; set; }
+
             public string TeamMemberEmails { get; set; }
         }
 
@@ -124,6 +130,22 @@ namespace QuizProject.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    await _context.Teams.AddAsync(
+                        new Teams()
+                        {
+                            Score = 0,
+                            City = Input.City,
+                            Id = Guid.NewGuid().ToString(),
+                            LoginGUID = user.Id,
+                            SpondorLastName = Input.SponsorLastName,
+                            SponsorFirstName = Input.SponsorFirstName,
+                            State = Input.State,
+                            TeamMemberEmails = Input.TeamMemberEmails,
+                            TeamName = Input.TeamName,
+                            ZipCode = Input.ZipCode
+                        }
+                        );
+                    await _context.SaveChangesAsync();
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
