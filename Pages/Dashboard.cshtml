@@ -1,6 +1,53 @@
 ﻿@page
 @model DashboardyModel
-<h1>Dashboard</h1>
+<div class="row">
+    <h1>Dashboard</h1>
+    <h2>@Model.TeamName</h2>
+</div>
+<div class="row">
+    <div class="col-4">
+        <p>
+            Highlighted mission patches (below) indicate open contest stages. You can start on any open stage, complete questions in previous stages you might not have finished, or work on this week’s stage.
+        </p>
+    </div>
+    <div class="col-4" id="score">
+        <h1>@Model.Score </h1> Total Points
+    </div>
+    <div class="col-4">
+        <p>There is a table and in witch position the team are</p>
+    </div>
 
-<p>There are team info.</p>
-
+</div>
+<div class="row" id="flags">
+    @foreach (var flag in Model.Flags)
+    {
+        <div class="col">
+            <img src="" class="img" />
+            <h3>@flag.Title</h3>
+            @if (flag.IsAviable)
+            {
+                <strong>Is Aviable </strong>
+            }
+        </div>
+    }
+</div>
+<hr />
+<div class="row">
+    <table class="table">
+        <tbody>
+            @foreach (var question in Model.Questions)
+            {
+                <tr>
+                    <td>
+                        @if (@question.Earned)
+                        {
+                            <strong>Resolved</strong>
+                        }
+                    </td>
+                    <td>@question.Name</td>
+                    <td>@question.Points Points</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
