@@ -42,7 +42,6 @@ namespace QuizProject.Databases
                 .HasForeignKey(d => d.IdQuestion);
             });
 
-
             modelBuilder.Entity<TeamAnswers>(entity =>
             {
                 entity.HasKey(o => o.Id);

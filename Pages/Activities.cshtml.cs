@@ -51,7 +51,7 @@ namespace QuizProject.Pages
                     Earned = false
                 };
 
-                da.Earned = (_context.TeamAnswers.Any(a => a.IdTeam == TeamId && a.IdQuestion == qu.Id));                
+                da.Earned = (_context.TeamAnswers.Any(a => a.IdTeam == TeamId && a.IdQuestion == qu.Id));
                 Questions.Add(da);
             }
 
