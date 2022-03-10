@@ -22,7 +22,7 @@ namespace QuizProject.Databases
         [StringLength(150)]
         public string City { get; set; }
         [Required]
-        [StringLength(100)]
+        [StringLength(10)]
         public string State { get; set; }
         [Required]
         [StringLength(10)]
@@ -33,6 +33,8 @@ namespace QuizProject.Databases
         /// This field joins IdentityContext with this custom table
         /// </summary>
         public string LoginGUID { get; set; }
+        [InverseProperty("IdTeamNavigation")]
+        public virtual ICollection<TeamAnswers> Answers { get; set; }
     }
 
     public class TeamAnswers
@@ -42,6 +44,18 @@ namespace QuizProject.Databases
         public string Answer { get; set; }
         public string IdTeam { get; set; }
         public string IdAnswer { get; set; }
+        public string IdQuestion { get; set; }
+
+        [ForeignKey(nameof(IdTeam))]
+        [InverseProperty(nameof(Teams.Answers))]
+        public virtual Teams IdTeamNavigation { get; set; }
+
+        [ForeignKey(nameof(IdAnswer))]
+        [InverseProperty(nameof(Databases.Answer.Teams))]
+        public virtual Answer IdAnswerNavigation { get; set; }
+        [ForeignKey(nameof(IdQuestion))]
+        [InverseProperty(nameof(Question.Teams))]
+        public virtual Question IdQuestionNavigation { get; set; }
     }
 
     public class Category
@@ -85,6 +99,9 @@ namespace QuizProject.Databases
 
         [InverseProperty("IdQuestionNavigation")]
         public virtual ICollection<Answer> Answers { get; set; }
+
+        [InverseProperty("IdQuestionNavigation")]
+        public virtual ICollection<TeamAnswers> Teams { get; set; }
     }
     public class Answer
     {
@@ -99,5 +116,8 @@ namespace QuizProject.Databases
         [ForeignKey(nameof(IdQuestion))]
         [InverseProperty(nameof(Question.Answers))]
         public virtual Question IdQuestionNavigation { get; set; }
+
+        [InverseProperty("IdAnswerNavigation")]
+        public virtual ICollection<TeamAnswers> Teams { get; set; }
     }
 }

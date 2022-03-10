@@ -9,6 +9,7 @@ namespace QuizProject.Databases
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<TeamAnswers> TeamAnswers  { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = @"Databases\QuizData.db" };
@@ -39,6 +40,20 @@ namespace QuizProject.Databases
                 entity.HasOne(d => d.IdQuestionNavigation)
                 .WithMany(p => p.Answers)
                 .HasForeignKey(d => d.IdQuestion);
+            });
+
+
+            modelBuilder.Entity<TeamAnswers>(entity =>
+            {
+                entity.HasKey(o => o.Id);
+
+                entity.HasOne(d => d.IdTeamNavigation)
+                .WithMany(p => p.Answers)
+                .HasForeignKey(d => d.IdTeam);
+
+                entity.HasOne(d => d.IdAnswerNavigation)
+                .WithMany(p => p.Teams)
+                .HasForeignKey(d => d.IdAnswer);
             });
 
         }
