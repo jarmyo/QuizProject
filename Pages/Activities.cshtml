@@ -1,0 +1,67 @@
+﻿@page
+@model ActivitiesModel
+<div class="row">
+    <h1>Activities</h1>
+    <h2>Bucke up</h2>
+    <h3>
+        Your STEMnaut adventure begins here – and could end on May 31, 2017, with you winning the grand prize.**
+    </h3>
+    <h4>
+        Each week, NASA and Each week, NASA and Texas Instruments will post questions, riddles and brainteasers for you to 
+figure out using the coding and STEM problem-solving processes that make human life in space 
+possible. Correct answers are worth anywhere from one to 20 points and you can attempt each 
+answer as many times as you like in accordance with the contest rules. Use the mission patches 
+below to navigate each set of challenge
+    </h4>
+</div>
+<div class="row">
+    <div class="col-4">
+        <p>
+            Highlighted mission patches (below) indicate open contest stages. You can start on any open stage, complete questions in previous stages you might not have finished, or work on this week’s stage.
+        </p>
+    </div>
+    <div class="col-4" id="score">
+        <h1>@Model.Score </h1> Total Points
+    </div>
+    <div class="col-4">
+        <p>There is a table and in witch position the team are</p>
+    </div>
+
+</div>
+<div class="row" id="flags">
+    @foreach (var flag in Model.Flags)
+    {
+        <div class="col">
+            <img src="" class="img" />
+            <h3>@flag.Title</h3>
+            @if (flag.IsAviable)
+            {
+                <strong>Is Aviable </strong>
+            }
+        </div>
+    }
+</div>
+<hr />
+<div class="row">
+    <h1>
+        Stage Description [ Not binding yet ]
+    </h1>
+    <table class="table">
+        <tbody>
+
+            @foreach (var question in Model.Questions)
+            {
+                <tr>
+                    <td>
+                        @if (@question.Earned)
+                        {
+                            <strong>Resolved</strong>
+                        }
+                    </td>
+                    <td>@question.Name</td>
+                    <td>@question.Points Points</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
