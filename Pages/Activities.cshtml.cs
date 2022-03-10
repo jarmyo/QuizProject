@@ -46,6 +46,7 @@ namespace QuizProject.Pages
                 {
                     Id = qu.Id,
                     Name = qu.Name,
+                    Description = qu.Description,
                     Points = qu.Points,
                     Earned = false
                 };

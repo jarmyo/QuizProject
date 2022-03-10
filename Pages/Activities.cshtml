@@ -2,17 +2,19 @@
 @model ActivitiesModel
 <div class="row">
     <h1>Activities</h1>
+    <hr />
     <h2>Bucke up</h2>
-    <h3>
-        Your STEMnaut adventure begins here – and could end on May 31, 2017, with you winning the grand prize.**
-    </h3>
     <h4>
-        Each week, NASA and Each week, NASA and Texas Instruments will post questions, riddles and brainteasers for you to 
-figure out using the coding and STEM problem-solving processes that make human life in space 
-possible. Correct answers are worth anywhere from one to 20 points and you can attempt each 
-answer as many times as you like in accordance with the contest rules. Use the mission patches 
-below to navigate each set of challenge
+        Your STEMnaut adventure begins here – and could end on May 31, 2017, with you winning the grand prize.**
     </h4>
+    <h5>
+        Each week, NASA and Each week, NASA and Texas Instruments will post questions, riddles and brainteasers for you to
+        figure out using the coding and STEM problem-solving processes that make human life in space
+        possible. Correct answers are worth anywhere from one to 20 points and you can attempt each
+        answer as many times as you like in accordance with the contest rules. Use the mission patches
+        below to navigate each set of challenge
+    </h5>
+    <hr />
 </div>
 <div class="row">
     <div class="col-4">
@@ -46,22 +48,34 @@ below to navigate each set of challenge
     <h1>
         Stage Description [ Not binding yet ]
     </h1>
-    <table class="table">
-        <tbody>
-
-            @foreach (var question in Model.Questions)
-            {
-                <tr>
-                    <td>
-                        @if (@question.Earned)
-                        {
-                            <strong>Resolved</strong>
-                        }
-                    </td>
-                    <td>@question.Name</td>
-                    <td>@question.Points Points</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <hr />
+    @foreach (var question in Model.Questions)
+    {
+        <div class="container">
+            <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+                <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+                    <h1 class="display-4 fw-bold lh-1">@question.Name</h1>
+                    <p class="lead">@question.Description</p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                        <input type="text" class="form-input" id="TeamAnser-@question.Id" />
+                        <button type="button" onclick="PostAnswer('@question.Id')" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Submit</button>
+                    </div>
+                </div>
+                <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+                    <img class="rounded-lg-3" src="https://picsum.photos/150" alt="" width="220">
+                </div>
+            </div>
+        </div>
+    }
 </div>
+<script>
+function PostAnswer(questionId)
+{
+    var idq= "TeamAnser-" + questionId;
+    console.log(idq);
+    var answ = document.getElementById(idq);
+     console.log(answ);
+    alert('hello: the answer of the Question ' + questionId + " is " + answ.value );
+    //This gonna send to the backend the question
+}
+</script>
