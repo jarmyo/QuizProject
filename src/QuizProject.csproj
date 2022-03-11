@@ -32,6 +32,16 @@
   <ItemGroup>
     <Folder Include="Areas\" />
     <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Databases\QuizData.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Databases\QuizProject.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
