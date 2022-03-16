@@ -5,7 +5,7 @@ namespace QuizProject.Databases
     /// <summary>
     /// TODO: Create maxleight data anotations
     /// </summary>
-    public class Teams
+    public class Team
     {
         [Key]
         public string Id { get; set; }
@@ -47,8 +47,8 @@ namespace QuizProject.Databases
         public string IdQuestion { get; set; }
 
         [ForeignKey(nameof(IdTeam))]
-        [InverseProperty(nameof(Teams.Answers))]
-        public virtual Teams IdTeamNavigation { get; set; }
+        [InverseProperty(nameof(Team.Answers))]
+        public virtual Team IdTeamNavigation { get; set; }
 
         [ForeignKey(nameof(IdAnswer))]
         [InverseProperty(nameof(Databases.Answer.Teams))]
@@ -60,6 +60,10 @@ namespace QuizProject.Databases
 
     public class Category
     {
+        public Category()
+        {
+            Questions = new List<Question>();
+        }
         [Key]
         public string Id { get; set; }
         [Required]
@@ -67,6 +71,8 @@ namespace QuizProject.Databases
         public string Title { get; set; }
         [Required]
         public string Description { get; set; }
+        [Required]        
+        public int Order { get; set; }
         public bool IsAviable { get; set; }
         public DateTime AviabilityDate { get; set; }
         [InverseProperty("IdCategoryNavigation")]
@@ -84,6 +90,11 @@ namespace QuizProject.Databases
         [StringLength(150)]
         public string Name { get; set; }
         public string Description { get; set; }
+        /// <summary>
+        /// Order or questions
+        /// </summary>
+        [Required]
+        public int Order { get; set; }
         /// <summary>
         /// This going to be render in plain HTML
         /// </summary>

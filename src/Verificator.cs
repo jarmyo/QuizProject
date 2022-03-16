@@ -8,7 +8,7 @@
 
             foreach (var validAnswers in answers)
             {
-                Dictionary<string, string> Variations = new Dictionary<string, string>()
+                Dictionary<string, string> Variations = new()
                 {
                     [validAnswers.Text.ToLower()] = response.ToLower(),
                     [validAnswers.Text.ToLowerInvariant()] = response.ToLowerInvariant(),

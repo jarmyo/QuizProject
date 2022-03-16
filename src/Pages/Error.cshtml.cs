@@ -8,7 +8,7 @@ namespace QuizProject.Pages
     [IgnoreAntiforgeryToken]
     public class ErrorModel : PageModel
     {
-        public string? RequestId { get; set; }
+        public string RequestId { get; set; }
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
@@ -21,6 +21,7 @@ namespace QuizProject.Pages
 
         public void OnGet()
         {
+            _logger.LogDebug("Error occur");
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
         }
     }

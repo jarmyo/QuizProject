@@ -1,4 +1,5 @@
 global using QuizProject.Databases;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using QuizProject.Areas.Identity.Data;
@@ -11,7 +12,8 @@ builder.Services.AddDbContext<QuizProjectIdentityDbContext>(options =>
 
 builder.Services.AddDbContext<QuizContext>();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<QuizProjectIdentityDbContext>();// Add services to the container.
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

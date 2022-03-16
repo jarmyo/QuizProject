@@ -57,7 +57,7 @@ namespace QuizProject.Areas.Identity.Pages.Account
             {
                 return NotFound($"Unable to load user with email '{email}'.");
             }
-
+            await _sender.SendEmailAsync("bpdy", "subkect", "message");
             Email = email;
             // Once you add a real email sender, you should remove this code that lets you confirm the account
             DisplayConfirmAccountLink = true;
@@ -69,7 +69,7 @@ namespace QuizProject.Areas.Identity.Pages.Account
                 EmailConfirmationUrl = Url.Page(
                     "/Account/ConfirmEmail",
                     pageHandler: null,
-                    values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                    values: new { area = "Identity", userId, code, returnUrl },
                     protocol: Request.Scheme);
             }
 

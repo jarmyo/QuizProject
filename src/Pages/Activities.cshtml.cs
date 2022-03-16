@@ -8,14 +8,11 @@ namespace QuizProject.Pages
     [Authorize]
     public class ActivitiesModel : PageModel
     {
-        private readonly ILogger<PrivacyModel> _logger;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly QuizContext _context;
-        public ActivitiesModel(ILogger<PrivacyModel> logger,
-              UserManager<IdentityUser> userManager,
+        public ActivitiesModel(UserManager<IdentityUser> userManager,
               QuizContext context)
         {
-            _logger = logger;
             _userManager = userManager;
             _context = context;
         }
@@ -51,7 +48,7 @@ namespace QuizProject.Pages
                     Earned = false
                 };
 
-                da.Earned = (_context.TeamAnswers.Any(a => a.IdTeam == TeamId && a.IdQuestion == qu.Id));
+                da.Earned = _context.TeamAnswers.Any(a => a.IdTeam == TeamId && a.IdQuestion == qu.Id);
                 Questions.Add(da);
             }
 

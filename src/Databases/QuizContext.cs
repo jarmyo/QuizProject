@@ -5,7 +5,7 @@ namespace QuizProject.Databases
 {
     public class QuizContext : DbContext
     {
-        public DbSet<Teams> Teams { get; set; }
+        public DbSet<Team> Teams { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -19,7 +19,7 @@ namespace QuizProject.Databases
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Teams>(entity =>
+            modelBuilder.Entity<Team>(entity =>
             {
                 entity.HasKey(o => o.Id);
             });

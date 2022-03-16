@@ -1,0 +1,72 @@
+﻿@page
+@model QuizProject.Areas.Admin.Pages.Teams.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Teams</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Teams.Id" />
+            <div class="form-group">
+                <label asp-for="Teams.TeamName" class="control-label"></label>
+                <input asp-for="Teams.TeamName" class="form-control" />
+                <span asp-validation-for="Teams.TeamName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Teams.SponsorFirstName" class="control-label"></label>
+                <input asp-for="Teams.SponsorFirstName" class="form-control" />
+                <span asp-validation-for="Teams.SponsorFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Teams.SpondorLastName" class="control-label"></label>
+                <input asp-for="Teams.SpondorLastName" class="form-control" />
+                <span asp-validation-for="Teams.SpondorLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Teams.City" class="control-label"></label>
+                <input asp-for="Teams.City" class="form-control" />
+                <span asp-validation-for="Teams.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Teams.State" class="control-label"></label>
+                <input asp-for="Teams.State" class="form-control" />
+                <span asp-validation-for="Teams.State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Teams.ZipCode" class="control-label"></label>
+                <input asp-for="Teams.ZipCode" class="form-control" />
+                <span asp-validation-for="Teams.ZipCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Teams.TeamMemberEmails" class="control-label"></label>
+                <input asp-for="Teams.TeamMemberEmails" class="form-control" />
+                <span asp-validation-for="Teams.TeamMemberEmails" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Teams.Score" class="control-label"></label>
+                <input asp-for="Teams.Score" class="form-control" />
+                <span asp-validation-for="Teams.Score" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Teams.LoginGUID" class="control-label"></label>
+                <input asp-for="Teams.LoginGUID" class="form-control" />
+                <span asp-validation-for="Teams.LoginGUID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+

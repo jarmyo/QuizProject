@@ -5,11 +5,8 @@ namespace QuizProject.Pages
 {
     public class RulesModel : PageModel
     {
-        private readonly ILogger<PrivacyModel> _logger;
-
-        public RulesModel(ILogger<PrivacyModel> logger)
+        public RulesModel()
         {
-            _logger = logger;
         }
 
         public void OnGet()
