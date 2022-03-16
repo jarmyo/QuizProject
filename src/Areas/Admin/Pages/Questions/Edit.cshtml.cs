@@ -12,9 +12,9 @@ namespace QuizProject.Areas.Admin.Pages.Questions
 {
     public class EditModel : PageModel
     {
-        private readonly QuizProject.Databases.QuizContext _context;
+        private readonly QuizContext _context;
 
-        public EditModel(QuizProject.Databases.QuizContext context)
+        public EditModel(QuizContext context)
         {
             _context = context;
         }

@@ -1,39 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using QuizProject.Databases;
 
 namespace QuizProject.Areas.Admin.Pages.Categories
 {
     public class CreateModel : PageModel
     {
-        private readonly QuizProject.Databases.QuizContext _context;
+        private readonly QuizContext _context;
+        private IWebHostEnvironment _environment;
 
-        public CreateModel(QuizProject.Databases.QuizContext context)
+        public CreateModel(QuizContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         public IActionResult OnGet()
         {
+            //default
+            Category.AviabilityDate = DateTime.Now;
             return Page();
         }
 
         [BindProperty]
         public Category Category { get; set; }
-
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        public IFormFile Upload { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
             Category.Id = Guid.NewGuid().ToString();
+            var newFileName = Category.Id + Path.GetExtension(Upload.FileName);
+            var file = Path.Combine(_environment.ContentRootPath, @"wwwroot\img", newFileName );
+            using (var fileStream = new FileStream(file, FileMode.Create))
+            {
+                await Upload.CopyToAsync(fileStream);
+            }
+
             _context.Categories.Add(Category);
             await _context.SaveChangesAsync();
             return RedirectToPage("./Index");

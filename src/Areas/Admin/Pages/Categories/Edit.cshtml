@@ -14,17 +14,17 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Category.Id" />
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Category.Title" class="control-label"></label>
                 <input asp-for="Category.Title" class="form-control" />
                 <span asp-validation-for="Category.Title" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Category.Description" class="control-label"></label>
                 <input asp-for="Category.Description" class="form-control" />
                 <span asp-validation-for="Category.Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Category.Order" class="control-label"></label>
                 <input asp-for="Category.Order" class="form-control" />
                 <span asp-validation-for="Category.Order" class="text-danger"></span>
@@ -34,12 +34,12 @@
                     <input class="form-check-input" asp-for="Category.IsAviable" /> @Html.DisplayNameFor(model => model.Category.IsAviable)
                 </label>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Category.AviabilityDate" class="control-label"></label>
                 <input asp-for="Category.AviabilityDate" class="form-control" />
                 <span asp-validation-for="Category.AviabilityDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

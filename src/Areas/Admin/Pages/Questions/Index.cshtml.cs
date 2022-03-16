@@ -11,9 +11,9 @@ namespace QuizProject.Areas.Admin.Pages.Questions
 {
     public class IndexModel : PageModel
     {
-        private readonly QuizProject.Databases.QuizContext _context;
+        private readonly QuizContext _context;
 
-        public IndexModel(QuizProject.Databases.QuizContext context)
+        public IndexModel(QuizContext context)
         {
             _context = context;
         }

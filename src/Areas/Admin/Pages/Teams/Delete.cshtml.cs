@@ -11,9 +11,9 @@ namespace QuizProject.Areas.Admin.Pages.Teams
 {
     public class DeleteModel : PageModel
     {
-        private readonly QuizProject.Databases.QuizContext _context;
+        private readonly QuizContext _context;
 
-        public DeleteModel(QuizProject.Databases.QuizContext context)
+        public DeleteModel(QuizContext context)
         {
             _context = context;
         }

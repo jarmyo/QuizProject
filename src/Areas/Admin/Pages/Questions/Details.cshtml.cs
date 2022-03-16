@@ -11,9 +11,9 @@ namespace QuizProject.Areas.Admin.Pages.Questions
 {
     public class DetailsModel : PageModel
     {
-        private readonly QuizProject.Databases.QuizContext _context;
+        private readonly QuizContext _context;
 
-        public DetailsModel(QuizProject.Databases.QuizContext context)
+        public DetailsModel(QuizContext context)
         {
             _context = context;
         }

@@ -11,9 +11,9 @@ namespace QuizProject.Areas.Admin.Pages.Answers
 {
     public class CreateModel : PageModel
     {
-        private readonly QuizProject.Databases.QuizContext _context;
+        private readonly QuizContext _context;
 
-        public CreateModel(QuizProject.Databases.QuizContext context)
+        public CreateModel(QuizContext context)
         {
             _context = context;
         }
