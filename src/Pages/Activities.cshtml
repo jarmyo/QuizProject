@@ -28,43 +28,50 @@
     <div class="col-4">
         <p>There is a table and in witch position the team are</p>
     </div>
-
 </div>
 <div class="row" id="flags">
     @foreach (var flag in Model.Flags)
     {
+        var imgname = flag.Id + ".png";
+        var cssfilter = (flag.IsAviable) ? string.Empty : "grayscale";
         <div class="col">
-            <img src="" class="img" />
+            <img src="/img/@imgname" class="img @cssfilter" />
             <h3>@flag.Title</h3>
-            @if (flag.IsAviable)
-            {
-                <strong>Is Aviable </strong>
-            }
         </div>
     }
 </div>
 <hr />
-<div class="row">
-    <h1>
-        Stage Description [ Not binding yet ]
-    </h1>
-    <hr />
-    @foreach (var question in Model.Questions)
-    {
-        <div class="container">
-            <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
-                <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-                    <h1 class="display-4 fw-bold lh-1">@question.Name</h1>
-                    <p class="lead">@question.Description</p>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                        <input type="text" class="form-input" id="TeamAnser-@question.Id" />
-                        <button type="button" onclick="PostAnswer('@question.Id')" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Submit</button>
+@foreach (var cat in Model.Flags)
+{
+    <div class="row">
+        <h1>
+            Stage @cat.Order  @cat.Description
+        </h1>
+        <hr />
+
+        <div class="accordion" id="QuestionAccordion">
+            @foreach (var question in cat.Questions.OrderBy(q=>q.Order))
+            {
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading-@question.Id">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@question.Id" aria-expanded="false" aria-controls="collapse-@question.Id">
+                            @question.Name ( @question.Points points )
+                        </button>
+                    </h2>
+                    <div id="collapse-@question.Id" class="accordion-collapse collapse" aria-labelledby="heading-@question.Id" data-bs-parent="#QuestionAccordion">
+                        <div class="accordion-body">
+                            <strong>@question.Description</strong>
+                            <div id="questionbody-@question.Id">
+                                @Html.Raw(question.HtmlBody)
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                                <input type="text" class="form-input" id="TeamAnser-@question.Id" />
+                                <button type="button" onclick="PostAnswer('@question.Id')" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Submit</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-                    <img class="rounded-lg-3" src="https://picsum.photos/150" alt="" width="220">
-                </div>
-            </div>
+            }
         </div>
-    }
-</div>
+    </div>
+}
