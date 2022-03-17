@@ -36,7 +36,6 @@ namespace QuizProject.Databases
         [InverseProperty("IdTeamNavigation")]
         public virtual ICollection<TeamAnswers> Answers { get; set; }
     }
-
     public class TeamAnswers
     {
         [Key]
@@ -45,7 +44,7 @@ namespace QuizProject.Databases
         public string IdTeam { get; set; }
         public string IdAnswer { get; set; }
         public string IdQuestion { get; set; }
-
+        public AnswerStatus Status { get; set; }
         [ForeignKey(nameof(IdTeam))]
         [InverseProperty(nameof(Team.Answers))]
         public virtual Team IdTeamNavigation { get; set; }
@@ -57,13 +56,12 @@ namespace QuizProject.Databases
         [InverseProperty(nameof(Question.Teams))]
         public virtual Question IdQuestionNavigation { get; set; }
     }
-
     public class Category
     {
-        public Category()
-        {
-            Questions = new List<Question>();
-        }
+        //public Category()
+        //{
+        //    Questions = new List<Question>();
+        //}
         [Key]
         public string Id { get; set; }
         [Required]
@@ -130,5 +128,12 @@ namespace QuizProject.Databases
 
         [InverseProperty("IdAnswerNavigation")]
         public virtual ICollection<TeamAnswers> Teams { get; set; }
+    }
+
+    public enum AnswerStatus : int
+    {
+        NotIntented = 0,
+        Correct =1,
+        Incorrect=2,
     }
 }
