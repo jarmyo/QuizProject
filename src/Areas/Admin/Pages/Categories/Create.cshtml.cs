@@ -7,23 +7,19 @@ namespace QuizProject.Areas.Admin.Pages.Categories
     {
         private readonly QuizContext _context;
         private IWebHostEnvironment _environment;
-
         public CreateModel(QuizContext context, IWebHostEnvironment environment)
         {
             _context = context;
             _environment = environment;
         }
-
         public IActionResult OnGet()
         {
-            //default
             Category = new()
             {
-                AviabilityDate = DateTime.Now
+                AviabilityDate = DateTime.Now //default
             };
             return Page();
         }
-
         [BindProperty]
         public Category Category { get; set; }
         public IFormFile Upload { get; set; }
@@ -35,15 +31,11 @@ namespace QuizProject.Areas.Admin.Pages.Categories
             }
 
             Category.Id = Guid.NewGuid().ToString();
-            var newFileName = Category.Id + Path.GetExtension(Upload.FileName);
-            var file = Path.Combine(_environment.ContentRootPath, @"wwwroot\img", newFileName );
-            using (var fileStream = new FileStream(file, FileMode.Create))
-            {
-                await Upload.CopyToAsync(fileStream);
-            }
 
             _context.Categories.Add(Category);
             await _context.SaveChangesAsync();
+            if (Upload != null)
+                await CategoryImageHelper.CreateImage(Category.Id, Upload, _environment);
             return RedirectToPage("./Index");
         }
     }

@@ -1,26 +1,23 @@
 ﻿@page
 @model QuizProject.Areas.Admin.Pages.Categories.EditModel
-
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit " + Model.Category.Title;
+    var imgPath = Model.Category.Id + ".png";
 }
-
-<h1>Edit</h1>
-
-<h4>Category</h4>
+<h1>Edit Category</h1>
 <hr />
 <div class="row">
-    <div class="col-6">
-        <form method="post">
+    <div class="col-6 p-4">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Category.Id" />
             <div class="mb-3">
-                <label asp-for="Category.Title" class="control-label"></label>
+                <label class="control-label">Title</label>
                 <input asp-for="Category.Title" class="form-control" />
                 <span asp-validation-for="Category.Title" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Category.Description" class="control-label"></label>
+                <label class="control-label">Description</label>
                 <textarea asp-for="Category.Description" class="form-control" rows="3"></textarea>
                 <span asp-validation-for="Category.Description" class="text-danger"></span>
             </div>
@@ -31,20 +28,34 @@
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Category.IsAviable" /> @Html.DisplayNameFor(model => model.Category.IsAviable)
+                    <input class="form-check-input" asp-for="Category.IsAviable" />Is Aviable
                 </label>
             </div>
             <div class="mb-3">
-                <label asp-for="Category.AviabilityDate" class="control-label"></label>
+                <label class="control-label">Aviability Date</label>
                 <input asp-for="Category.AviabilityDate" class="form-control" />
                 <span asp-validation-for="Category.AviabilityDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                @if (Model.HasImage)
+                {
+                    <label class="form-label">Current Image</label>
+                    <img class="img" src="~/img/@imgPath" />
+                    <br />
+                    <label class="form-label">Replace</label>
+                }
+                else
+                {
+                    <label class="form-label">Upload</label>
+                }
+                <input class="form-control" asp-for="Upload" />
             </div>
             <div class="mb-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
-    <div class="col-6 py-2">
+    <div class="col-6 p-4">
         <h5>Categorie's Questions</h5>
         <ul>
             @foreach (var q in Model.Category.Questions)
@@ -54,8 +65,6 @@
         </ul>
     </div>
 </div>
-
 <div>
     <a asp-page="./Index">Back to List</a>
 </div>
-
