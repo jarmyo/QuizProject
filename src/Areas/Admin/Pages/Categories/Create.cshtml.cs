@@ -17,7 +17,10 @@ namespace QuizProject.Areas.Admin.Pages.Categories
         public IActionResult OnGet()
         {
             //default
-            Category.AviabilityDate = DateTime.Now;
+            Category = new()
+            {
+                AviabilityDate = DateTime.Now
+            };
             return Page();
         }
 

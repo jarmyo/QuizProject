@@ -23,19 +23,16 @@
                 @Html.DisplayNameFor(model => model.Question[0].Order)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Question[0].HtmlBody)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Question[0].Points)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Question[0].IdCategoryNavigation)
+              Category
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Question) {
+@foreach (var item in Model.Question.OrderBy(q=>q.IdCategory).ThenBy(q=>q.Order) ) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -45,15 +42,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Order)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HtmlBody)
-            </td>
+            </td>            
             <td>
                 @Html.DisplayFor(modelItem => item.Points)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdCategoryNavigation.Id)
+                @Html.DisplayFor(modelItem => item.IdCategoryNavigation.Title)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

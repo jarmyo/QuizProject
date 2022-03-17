@@ -22,7 +22,12 @@ namespace QuizProject.Areas.Admin.Pages.Categories
 
         public async Task OnGetAsync()
         {
-            Category = await _context.Categories.ToListAsync();
+            Category= new List<Category>();
+            foreach (var c in await _context.Categories.ToListAsync())
+            {
+                c.Questions = _context.Questions.Where(x => x.IdCategory == c.Id).ToList();
+                Category.Add(c);
+            }
         }
     }
 }

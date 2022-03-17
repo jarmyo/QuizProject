@@ -5,53 +5,48 @@
 }
 <h1>Manage Categories</h1>
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Category[0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category[0].Order)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category[0].IsAviable)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category[0].AviabilityDate)
-            </th>
-            <th></th>
+            <th scope="col"></th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Display Order</th>
+            <th scope="col">Aviable</th>
+            <th scope="col">Aviable From</th>            
+            <th scope="col"># Questions</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Category) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Order)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAviable)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AviabilityDate)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Category.OrderBy(c => c.Order))
+        {
+            var imgname = item.Id + ".png";
+            <tr>
+                <td>
+                    <img src="/img/@imgname" class="img-fluid" />
+                </td>
+                <td>@item.Title</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAviable)
+                </td>
+                <td>@item.AviabilityDate.ToShortDateString()</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Questions.Count)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |                    
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="link-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

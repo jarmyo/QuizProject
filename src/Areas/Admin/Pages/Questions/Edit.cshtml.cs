@@ -36,7 +36,7 @@ namespace QuizProject.Areas.Admin.Pages.Questions
             {
                 return NotFound();
             }
-           ViewData["IdCategory"] = new SelectList(_context.Categories, "Id", "Id");
+           ViewData["IdCategory"] = new SelectList(_context.Categories, "Id", "Title");
             return Page();
         }
 
