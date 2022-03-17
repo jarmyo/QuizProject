@@ -10,7 +10,7 @@
 <h4>Category</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-6">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Category.Id" />
@@ -43,6 +43,15 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+    </div>
+    <div class="col-6 py-2">
+        <h5>Categorie's Questions</h5>
+        <ul>
+            @foreach (var q in Model.Category.Questions)
+            {
+                <li><a asp-area="Admin" asp-page="/Questions/Edit" asp-route-id="@q.Id">@q.Name</a></li>
+            }
+        </ul>
     </div>
 </div>
 

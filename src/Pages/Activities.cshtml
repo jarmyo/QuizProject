@@ -44,11 +44,10 @@
 @foreach (var cat in Model.Flags)
 {
     <div class="row">
-        <h1>
+        <h3>
             Stage @cat.Order  @cat.Description
-        </h1>
+        </h3>
         <hr />
-
         <div class="accordion" id="QuestionAccordion">
             @foreach (var question in cat.Questions.OrderBy(q=>q.Order))
             {

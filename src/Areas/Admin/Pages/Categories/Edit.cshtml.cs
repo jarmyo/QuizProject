@@ -35,6 +35,10 @@ namespace QuizProject.Areas.Admin.Pages.Categories
             {
                 return NotFound();
             }
+            else
+            {
+                Category.Questions = _context.Questions.Where(q => q.IdCategory == id).ToList();
+            }
             return Page();
         }
 
