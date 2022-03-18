@@ -19,7 +19,7 @@
 
 </div>
 <div class="row" id="flags">
-    @foreach (var flag in Model.Flags)
+    @foreach (var flag in Model.Categories)
     {
         <div class="col">
             <img src="" class="img" />
@@ -33,21 +33,46 @@
 </div>
 <hr />
 <div class="row">
-    <table class="table">
-        <tbody>
-            @foreach (var question in Model.Questions)
-            {
-                <tr>
-                    <td>
-                        @if (@question.Earned)
-                        {
-                            <strong>Resolved</strong>
-                        }
-                    </td>
-                    <td>@question.Name</td>
-                    <td>@question.Points Points</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    @foreach (var cat in Model.Categories)
+    {
+        <div class="row">
+            <h3>
+                Stage @cat.Order  @cat.Description
+            </h3>
+            <hr />
+            <div class="accordion" id="QuestionAccordion">
+                @foreach (var question in cat.Questions.OrderBy(q => q.Order))
+                {
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading-@question.Id">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@question.Id" aria-expanded="false" aria-controls="collapse-@question.Id">
+                                @if (question.Teams.Any())
+                                {
+                                    { var qq = question.Teams.First(); }
+                                    <strong>qq.Status</strong>
+                                }
+                                else
+                                {
+                                    <strong>unresolved</strong>
+                                }
+                                @question.Name ( @question.Points points )
+                            </button>
+                        </h2>
+                        <div id="collapse-@question.Id" class="accordion-collapse collapse" aria-labelledby="heading-@question.Id" data-bs-parent="#QuestionAccordion">
+                            <div class="accordion-body">
+                                <strong>@question.Description</strong>
+                                <div id="questionbody-@question.Id">
+                                    @Html.Raw(question.HtmlBody)
+                                </div>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                                    <input type="text" class="form-input" id="TeamAnser-@question.Id" />
+                                    <button type="button" onclick="PostAnswer('@question.Id')" class="button-red">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
 </div>

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-
-namespace QuizProject.Pages
+﻿namespace QuizProject.Pages
 {
     [Authorize]
     public class ActivitiesModel : PageModel
@@ -13,7 +11,6 @@ namespace QuizProject.Pages
             _userManager = userManager;
             _context = context;
         }
-
         public string TeamName { get; set; }
         public string TeamId { get; set; }
         public int Score { get; set; }
@@ -29,10 +26,8 @@ namespace QuizProject.Pages
                 Score = team.Score;
                 TeamId = team.Id;
             }
-            else
-            {
-                return NotFound(); //Team not registred
-            }
+            else return NotFound(); //Team not registred                                    
+
             Categories = new List<Category>();
             foreach (var category in _context.Categories)
             {
