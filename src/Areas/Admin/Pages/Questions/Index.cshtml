@@ -2,59 +2,47 @@
 @model QuizProject.Areas.Admin.Pages.Questions.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Manage Questions";
 }
-
-<h1>Index</h1>
-
+<h1>@ViewData["Title"]</h1>
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Question[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question[0].Order)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question[0].Points)
-            </th>
-            <th>
-              Category
-            </th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Display Order</th>
+            <th>Point</th>
+            <th>Category</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Question.OrderBy(q=>q.IdCategory).ThenBy(q=>q.Order) ) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Order)
-            </td>            
-            <td>
-                @Html.DisplayFor(modelItem => item.Points)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCategoryNavigation.Title)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Question.OrderBy(q => q.IdCategory).ThenBy(q => q.Order))
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Description
+                </td>
+                <td>
+                    @item.Order
+                </td>
+                <td>
+                    @item.Points
+                </td>
+                <td>
+                    @item.IdCategoryNavigation.Title
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="link-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

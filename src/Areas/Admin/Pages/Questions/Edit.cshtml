@@ -1,21 +1,17 @@
 @page
 @model QuizProject.Areas.Admin.Pages.Questions.EditModel
-
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Question";
 }
-
-<h1>Edit</h1>
-
-<h4>Question</h4>
+<h1>@ViewData["Title"] </h1>
 <hr />
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Question.Id" />
             <div class="mb-3">
-                <label asp-for="Question.Name" class="control-label">Name</label>
+                <label asp-for="Question.Name" class="control-label"></label>
                 <input asp-for="Question.Name" class="form-control" />
                 <span asp-validation-for="Question.Name" class="text-danger"></span>
             </div>
@@ -35,22 +31,19 @@
                 <a class="btn btn-primary" data-bs-toggle="collapse" href="#editHTML" role="button" aria-expanded="false" aria-controls="editHTML">Edit HTML</a> | <a class="btn btn-primary" data-bs-toggle="collapse" href="#previewHTML" role="button" aria-expanded="false" aria-controls="previewHTML">Preview</a>
             </div>
             <div class="collapse" id="editHTML">
-
                 <div class="mb-3">
                     <label asp-for="Question.HtmlBody" class="control-label"></label>
                     <textarea asp-for="Question.HtmlBody" class="form-control" rows="8"></textarea>
                     <span asp-validation-for="Question.HtmlBody" class="text-danger"></span>
                 </div>
-
             </div>
             <div class="collapse" id="previewHTML">
                 <div class="card card-body">
                     @Html.Raw(Model.Question.HtmlBody)
                 </div>
             </div>
-
             <div class="mb-3">
-                <label asp-for="Question.Points" class="control-label"></label>
+                <label class="control-label">Points</label>
                 <input asp-for="Question.Points" class="form-control" />
                 <span asp-validation-for="Question.Points" class="text-danger"></span>
             </div>
@@ -65,7 +58,6 @@
         </form>
     </div>
 </div>
-
 <div>
     <a asp-page="./Index">Back to List</a>
 </div>
