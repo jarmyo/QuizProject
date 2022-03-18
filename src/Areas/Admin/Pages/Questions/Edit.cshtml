@@ -6,7 +6,9 @@
 <h1>@ViewData["Title"] </h1>
 <hr />
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-8">
+        <h4>Attributes</h4>
+        <hr />
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Question.Id" />
@@ -26,23 +28,6 @@
                 <span asp-validation-for="Question.Order" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label class="control-label">HTML Body</label>
-                <pre><code class="language-html">@Model.Question.HtmlBody</code></pre>
-                <a class="btn btn-primary" data-bs-toggle="collapse" href="#editHTML" role="button" aria-expanded="false" aria-controls="editHTML">Edit HTML</a> | <a class="btn btn-primary" data-bs-toggle="collapse" href="#previewHTML" role="button" aria-expanded="false" aria-controls="previewHTML">Preview</a>
-            </div>
-            <div class="collapse" id="editHTML">
-                <div class="mb-3">
-                    <label asp-for="Question.HtmlBody" class="control-label"></label>
-                    <textarea asp-for="Question.HtmlBody" class="form-control" rows="8"></textarea>
-                    <span asp-validation-for="Question.HtmlBody" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="collapse" id="previewHTML">
-                <div class="card card-body">
-                    @Html.Raw(Model.Question.HtmlBody)
-                </div>
-            </div>
-            <div class="mb-3">
                 <label class="control-label">Points</label>
                 <input asp-for="Question.Points" class="form-control" />
                 <span asp-validation-for="Question.Points" class="text-danger"></span>
@@ -53,9 +38,50 @@
                 <span asp-validation-for="Question.IdCategory" class="text-danger"></span>
             </div>
             <div class="mb-3">
+                <label class="control-label">HTML Body</label>
+                <pre><code class="language-html">@Model.Question.HtmlBody</code></pre>
+            </div>
+            <a class="btn btn-primary" data-bs-toggle="collapse" href="#editHTML" role="button" aria-expanded="false" aria-controls="editHTML">Edit HTML</a> | <a class="btn btn-primary" data-bs-toggle="collapse" href="#previewHTML" role="button" aria-expanded="false" aria-controls="previewHTML">Preview</a>
+            <div class="collapse" id="editHTML">
+                <div class="mb-3">
+                    <label asp-for="Question.HtmlBody" class="control-label"></label>
+                    <textarea asp-for="Question.HtmlBody" class="form-control" rows="8"></textarea>
+                    <span asp-validation-for="Question.HtmlBody" class="text-danger"></span>
+                </div>
+            </div>
+            @*Maybe preview must be on modal, because if some bad tag, can break this form*@
+            <div class="collapse" id="previewHTML">
+                <div class="card card-body">
+                    @Html.Raw(Model.Question.HtmlBody)
+                </div>
+            </div>
+            <div class="mb-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+    </div>
+    <div class="col-4">
+        <h4>Answers</h4>
+        <p>Upper and LowerCase variations are not necessary</p>
+        <hr />
+        <table class="table table-striped table-sm">
+            <tbody>
+                @foreach (var acceptedAnswer in Model.Question.Answers)
+                {
+                    <tr>
+                        <td>@acceptedAnswer.Text</td>
+                        <td>
+                            <a href="">Edit</a> | <a href="" class="link-danger">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <hr />
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Add new answer" aria-label="Add new answer" aria-describedby="button-addon2">
+            <button class="btn btn-primary" type="button" id="button-addon2">Add</button>
+        </div>
     </div>
 </div>
 <div>
