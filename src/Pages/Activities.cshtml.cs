@@ -40,10 +40,13 @@ namespace QuizProject.Pages
             Categories = new List<Category>();
             foreach (var category in _context.Categories)
             {
-                category.Questions = _context.Questions.Where(q => q.IdCategory == category.Id).ToList();               
-                foreach (var qu in category.Questions.ToList())
+                if (category.IsAviable)
                 {
-                    qu.Teams = _context.TeamAnswers.Where(q => q.IdTeam == TeamId && q.IdQuestion == qu.Id).ToList();                 
+                    category.Questions = _context.Questions.Where(q => q.IdCategory == category.Id).ToList();
+                    foreach (var qu in category.Questions.ToList())
+                    {
+                        qu.Teams = _context.TeamAnswers.Where(q => q.IdTeam == TeamId && q.IdQuestion == qu.Id).ToList();
+                    }
                 }
 
                 Categories.Add(category);
