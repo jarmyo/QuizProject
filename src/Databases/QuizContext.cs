@@ -1,6 +1,6 @@
 ﻿global using System.ComponentModel.DataAnnotations;
+global using QuizProject.Databases;
 using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
 namespace QuizProject.Databases
 {
     public class QuizContext : DbContext

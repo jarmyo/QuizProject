@@ -2,9 +2,6 @@
 
 namespace QuizProject.Databases
 {
-    /// <summary>
-    /// TODO: Create maxleight data anotations
-    /// </summary>
     public class Team
     {
         [Key]
@@ -33,6 +30,7 @@ namespace QuizProject.Databases
         /// This field joins IdentityContext with this custom table
         /// </summary>
         public string LoginGUID { get; set; }
+        //==== Navigation Properties ====
         [InverseProperty("IdTeamNavigation")]
         public virtual ICollection<TeamAnswers> Answers { get; set; }
     }
@@ -45,6 +43,7 @@ namespace QuizProject.Databases
         public string IdAnswer { get; set; }
         public string IdQuestion { get; set; }
         public AnswerStatus Status { get; set; }
+        //==== Navigation Properties ====
         [ForeignKey(nameof(IdTeam))]
         [InverseProperty(nameof(Team.Answers))]
         public virtual Team IdTeamNavigation { get; set; }
@@ -68,15 +67,12 @@ namespace QuizProject.Databases
         public int Order { get; set; }
         public bool IsAviable { get; set; }
         public DateTime AviabilityDate { get; set; }
+        //==== Navigation Properties ====
         [InverseProperty("IdCategoryNavigation")]
         public virtual ICollection<Question> Questions { get; set; }
     }
     public class Question
     {
-        public Question()
-        {
-           
-        }
         [Key]
         public string Id { get; set; }
         [Required]
@@ -97,13 +93,12 @@ namespace QuizProject.Databases
         /// </summary>
         public int Points { get; set; }
         public string IdCategory { get; set; }
+        //==== Navigation Properties ====
         [ForeignKey(nameof(IdCategory))]
         [InverseProperty(nameof(Category.Questions))]
         public virtual Category IdCategoryNavigation { get; set; }
-
         [InverseProperty("IdQuestionNavigation")]
         public virtual ICollection<Answer> Answers { get; set; }
-
         [InverseProperty("IdQuestionNavigation")]
         public virtual ICollection<TeamAnswers> Teams { get; set; }
     }
@@ -113,15 +108,13 @@ namespace QuizProject.Databases
         public string Id { get; set; }
         public string Text { get; set; }
         public string IdQuestion { get; set; }
-
+        //==== Navigation Properties ====
         [ForeignKey(nameof(IdQuestion))]
         [InverseProperty(nameof(Question.Answers))]
         public virtual Question IdQuestionNavigation { get; set; }
-
         [InverseProperty("IdAnswerNavigation")]
         public virtual ICollection<TeamAnswers> Teams { get; set; }
     }
-
     public enum AnswerStatus : int
     {
         NotIntented = 0,

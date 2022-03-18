@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace QuizProject.Pages
 {
@@ -36,7 +33,6 @@ namespace QuizProject.Pages
             {
                 return NotFound(); //Team not registred
             }
-
             Categories = new List<Category>();
             foreach (var category in _context.Categories)
             {

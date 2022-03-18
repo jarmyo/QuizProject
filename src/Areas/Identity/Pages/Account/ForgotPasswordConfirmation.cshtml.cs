@@ -3,7 +3,6 @@
 #nullable disable
 
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace QuizProject.Areas.Identity.Pages.Account
 {

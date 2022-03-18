@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-
-namespace QuizProject.Pages
+﻿namespace QuizProject.Pages
 {
     public class ResulterModel : PageModel
     {

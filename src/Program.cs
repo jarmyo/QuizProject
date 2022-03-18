@@ -1,7 +1,8 @@
-global using QuizProject.Databases;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Mvc.RazorPages;
+global using Microsoft.AspNetCore.Mvc.Rendering;
 using QuizProject.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);

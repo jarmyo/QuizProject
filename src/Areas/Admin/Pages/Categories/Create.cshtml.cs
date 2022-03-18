@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-
-namespace QuizProject.Areas.Admin.Pages.Categories
+﻿namespace QuizProject.Areas.Admin.Pages.Categories
 {
     public class CreateModel : PageModel
     {
