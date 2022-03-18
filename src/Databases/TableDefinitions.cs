@@ -48,7 +48,6 @@ namespace QuizProject.Databases
         [ForeignKey(nameof(IdTeam))]
         [InverseProperty(nameof(Team.Answers))]
         public virtual Team IdTeamNavigation { get; set; }
-
         [ForeignKey(nameof(IdAnswer))]
         [InverseProperty(nameof(Databases.Answer.Teams))]
         public virtual Answer IdAnswerNavigation { get; set; }
@@ -58,10 +57,6 @@ namespace QuizProject.Databases
     }
     public class Category
     {
-        //public Category()
-        //{
-        //    Questions = new List<Question>();
-        //}
         [Key]
         public string Id { get; set; }
         [Required]
@@ -114,9 +109,6 @@ namespace QuizProject.Databases
     }
     public class Answer
     {
-        public Answer()
-        {
-        }
         [Key]
         public string Id { get; set; }
         public string Text { get; set; }

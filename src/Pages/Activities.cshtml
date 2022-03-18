@@ -33,7 +33,7 @@
     </div>
 </div>
 <div class="row" id="flags">
-    @foreach (var flag in Model.Flags)
+    @foreach (var flag in Model.Categories)
     {
         var imgname = flag.Id + ".png";
         var cssfilter = (flag.IsAviable) ? string.Empty : "grayscale";
@@ -44,7 +44,7 @@
     }
 </div>
 <hr />
-@foreach (var cat in Model.Flags)
+@foreach (var cat in Model.Categories)
 {
     <div class="row">
         <h3>
@@ -52,11 +52,20 @@
         </h3>
         <hr />
         <div class="accordion" id="QuestionAccordion">
-            @foreach (var question in cat.Questions.OrderBy(q=>q.Order))
+            @foreach (var question in cat.Questions.OrderBy(q => q.Order))
             {
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading-@question.Id">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@question.Id" aria-expanded="false" aria-controls="collapse-@question.Id">
+                            @if (question.Teams.Any())
+                            {
+                                { var qq = question.Teams.First(); }
+                                <strong>qq.Status</strong>
+                            }
+                            else
+                            {
+                                <strong>unresolved</strong>
+                            }
                             @question.Name ( @question.Points points )
                         </button>
                     </h2>
