@@ -3,7 +3,7 @@
     public class CreateModel : PageModel
     {
         private readonly QuizContext _context;
-        private IWebHostEnvironment _environment;
+        private readonly IWebHostEnvironment _environment;
         public CreateModel(QuizContext context, IWebHostEnvironment environment)
         {
             _context = context;

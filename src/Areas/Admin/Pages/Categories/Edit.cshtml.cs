@@ -3,7 +3,7 @@
     public class EditModel : PageModel
     {
         private readonly QuizContext _context;
-        private IWebHostEnvironment _environment;
+        private readonly IWebHostEnvironment _environment;
         public EditModel(QuizContext context, IWebHostEnvironment environment)
         {
             _context = context;
