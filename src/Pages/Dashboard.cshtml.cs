@@ -1,11 +1,11 @@
 ﻿namespace QuizProject.Pages
 {
     [Authorize]
-    public class DashboardyModel : PageModel
+    public class DashboardModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly QuizContext _context;
-        public DashboardyModel(UserManager<IdentityUser> userManager,
+        public DashboardModel (UserManager<IdentityUser> userManager,
               QuizContext context)
         {
             _userManager = userManager;

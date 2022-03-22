@@ -39,7 +39,6 @@
                         qu.Teams = _context.TeamAnswers.Where(q => q.IdTeam == TeamId && q.IdQuestion == qu.Id).ToList();
                     }
                 }
-
                 Categories.Add(category);
             }
             return Page();
