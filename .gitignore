@@ -363,5 +363,9 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # SQLite lock files
-*.db-shm
-*.db-wal
+src/Databases/*.db
+src/Databases/*.db-shm
+src/Databases/*.db-wal
+# Generated Javascript 
+src/wwwroot/js/*.js
+src/wwwroot/js/*.js.map
