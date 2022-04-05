@@ -1,0 +1,88 @@
+﻿@page
+@model Activities2Model
+<div class="row">
+    <h1>Activities</h1>
+    <hr />
+    <h2>Bucke up</h2>
+    <h4>
+        Your STEMnaut adventure begins here – and could end on May 31, 2017, with you winning the grand prize.**
+    </h4>
+    <h5>
+        Each week, NASA and Each week, NASA and Texas Instruments will post questions, riddles and brainteasers for you to
+        figure out using the coding and STEM problem-solving processes that make human life in space
+        possible. Correct answers are worth anywhere from one to 20 points and you can attempt each
+        answer as many times as you like in accordance with the contest rules. Use the mission patches
+        below to navigate each set of challenge
+    </h5>
+    <hr />
+</div>
+<div class="row">
+    <div class="col-4">
+        <p>
+            Highlighted mission patches (below) indicate open contest stages. You can start on any open stage, complete questions in previous stages you might not have finished, or work on this week’s stage.
+        </p>
+    </div>
+    <div class="col-4" id="score">
+        <h1>@Model.Score </h1> Total Points
+    </div>
+    <div class="col-4">
+        <p>There is a table and in witch position the team are</p>
+    </div>
+</div>
+<div class="row" id="flags">
+    @foreach (var flag in Model.Categories)
+    {
+        var imgname = flag.Id + ".png";
+        var cssfilter = (flag.IsAviable) ? string.Empty : "grayscale";
+        <div class="col">
+            <img src="/img/@imgname" class="img @cssfilter" />
+            <h3>@flag.Title</h3>
+        </div>
+    }
+</div>
+<hr />
+@foreach (var cat in Model.Categories)
+{
+    <div class="row">
+        <h3>
+            Stage @cat.Order  @cat.Description
+        </h3>
+        <hr />
+        <div class="accordion" id="QuestionAccordion">
+            @if (cat.Questions != null && cat.Questions.Any())
+            {
+                @foreach (var question in cat.Questions.OrderBy(q => q.Order))
+                {
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading-@question.Id">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@question.Id" aria-expanded="false" aria-controls="collapse-@question.Id">
+                                @if (question.Teams.Any())
+                                {
+                                    { var qq = question.Teams.First(); }
+                                    <strong>qq.Status</strong> 
+                                }
+                                else
+                                {
+                                    <strong>unresolved</strong> 
+                                }
+                                - @question.Name ( @question.Points points )
+                            </button>
+                        </h2>
+                        <div id="collapse-@question.Id" class="accordion-collapse collapse" aria-labelledby="heading-@question.Id" data-bs-parent="#QuestionAccordion">
+                            <div class="accordion-body">
+                                <strong>@question.Description</strong>
+                                <div id="questionbody-@question.Id">
+                                    @Html.Raw(question.HtmlBody)
+                                </div>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                                    <input type="text" class="form-input" id="TeamAnser-@question.Id" />
+                                    <button type="button" onclick="PostAnswer('@question.Id')" class="btn">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}

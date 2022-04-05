@@ -1,21 +1,16 @@
 .grayscale {
     filter: grayscale(100%);
 }
-.button-red {
-    font-family: Lato-Bold;
-    color: #fff;
-    font-size: 14px;
-    background: #c00;
-    border-radius: 30px;
-    -moz-border-radius: 30px;
-    -webkit-border-radius: 30px;
-    padding: 7px 25px 7px 15px;
-    text-align: center;
-    border: solid 3px #d7d7d7;
-    margin-bottom: 20px;
-    display: inline-block;
-    position: relative;
-}
 /*Layout*/
+.Page-Title
+{
+
+}
+.Page-Paragraph{
+
+}
 /*Components*/
+.btn-red {    
+
+}
 /*Brand*/
